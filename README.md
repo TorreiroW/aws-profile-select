@@ -1,5 +1,7 @@
 # AWS Profile Select Tool
 
+This is a fork of [https://github.com/jprice-da15252/aws-profile-select](https://github.com/jprice-da15252/aws-profile-select)
+
 ## A painless way to select an AWS profile
 
 This script scans your aws configuration for profile names, and allows you to choose them by number, because messing with environment variables repeatedly is toil. Toil sucks.
@@ -15,7 +17,7 @@ It's also a handy way to see the currently selected profile, as it is given in a
 aps has been tested to be compatible with the following shell versions:
 
 -   Bash: v4 and newer
--   ZSH: tested with v5.8 (with [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh/wiki) installed, but should work equally well without it)
+-   ZSH: tested with v5.8 (with [Oh My Zsh!](https://github.com/ohmyzsh/ohmyzsh/wiki) installed, but should work equally well without it). ZSH has the option to use RPROMPT shell variable.
 
 It may work with shells sharing compatibility with the above, but it's certainly not guaranteed.
 
@@ -33,14 +35,18 @@ _Note_: the procedures below will be replaced by a homebrew tap in the near futu
 
 1. Download, optionally inspect, and copy the script to an appropriate folder:
     ```
-    curl -o /tmp/aws-profile-select.sh https://raw.githubusercontent.com/jprice-da15252/aws-profile-select/main/aws-profile-select.sh
-    sudo cp /tmp/aws-profile-select.sh /usr/local/bin/aws-profile-select.sh
+    curl -o /tmp/aws-profile-select.sh https://github.com/TorreiroW/aws-profile-select/blob/main/aws-switch-profile.sh
+    sudo cp /tmp/aws-profile-select.sh /usr/local/bin/aws-switch-profile.sh
     ```
 2. Add aliases:
-    ```
-    echo -e "\nalias aps='source /usr/local/bin/aws-profile-select.sh'" >> ~/.bash_profile
-    echo -e "\nalias aps='source /usr/local/bin/aws-profile-select.sh'" >> ~/.zshrc
-    ```
+    *Bash*
+    Put an alias in your profile file, for example:
+    `echo -e "\nalias aws-switch='source /usr/local/bin/aws-switch-profile.sh'" >> ~/.bash_profile`
+    *ZSH* 
+    Put an alias in your profile file, for example:
+    `echo -e "\nalias aws-switch='source /usr/local/bin/aws-switch-profile.sh'" >> ~/.zshrc`
+    *Oh-My-ZSH*
+    `echo -e "\nalias aws-switch='source /usr/local/bin/aws-switch-profile.sh'" >> ~/.oh-my-zsh/custom/aliases.sh`
 
 Adding an alias to both config files is advised. Even if you only use one of the above shells, this will ensure that aps works the same in either, should the need arise.
 
@@ -49,7 +55,7 @@ Adding an alias to both config files is advised. Even if you only use one of the
 Using a new terminal window or tab (required for the new alias settings to take effect), simply run the script using the alias created above (aps):
 
 ```
-aws-superstar@hackstation-[~]: aps
+aws-superstar@hackstation-[~]: aws-switch
 
 ------------- AWS Profile Select-O-Matic -------------
 No profile set yet
